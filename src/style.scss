@@ -1,0 +1,125 @@
+@import "_mixins";
+@import "_colors";
+@import "_fonts";
+@import '_media';
+
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+* {
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  color: white;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: $fs-normal;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+}
+
+.cta,
+.link-box__wrapper,
+.slider {
+  display: flex;
+}
+
+.cta--action-header p,
+.link-box--description h3 {
+  font-weight: $fw-bold;
+  font-size: $fs-v-small;
+  text-transform: uppercase;
+}
+
+.cta {
+  @include bg_image_center;
+  @include bg_tint($dark-blue, 0.7, 0.0);
+
+  flex-direction: column;
+  background-image: url("img/cta.jpg");
+  padding: 20px;
+
+  &--welcome {
+    margin-bottom: 10px;
+  }
+
+  &--action {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @media #{$xs-up} {
+      flex-direction: row;
+    }
+
+    &-header {
+      flex: 1;
+    }
+
+    &-link {
+      flex: 1;
+
+      button {
+        padding: 5px 10px;
+        border: 2px solid $white;
+        font-weight: $fw-bold;
+      }
+    }
+  }
+}
+
+.link-box {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 50%;
+  min-height: 200px;
+
+  &__wrapper {
+    flex-wrap: wrap;
+  }
+
+  &--fullwidth {
+    flex: 0 0 100%;
+
+    @media #{$xs-up} {
+      flex: 1 1 50%;
+    }
+  }
+
+  $colors: [
+    gray,
+    silver,
+    sienna,
+    tomato
+  ];
+
+  @for $i from 1 through 4 {
+    &--#{$i} {
+      @include bg_image_center;
+      @include bg_tint(nth($colors, $i), 0.3);
+      background-image: url("img/link-box-#{$i}.jpg");
+
+      &:hover {
+        @include bg_tint(nth($colors, $i), 0.1);
+      }
+    }
+  }
+
+  &--header {
+  }
+
+  &--description {
+    small {
+      font-weight: $fw-thin;
+      font-size: $fs-v-small;
+    }
+  }
+
+  > div {
+    margin: 30px;
+  }
+}
